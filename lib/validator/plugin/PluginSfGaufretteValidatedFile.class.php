@@ -69,6 +69,7 @@ class PluginSfGaufretteValidatedFile extends sfValidatedFile
       $this->gaufrette->write($file, $content);
       $this->savedName = $file;
     }
+
+    return $file;
   }
 } // END OF PluginSfGaufretteValidatedFile
-

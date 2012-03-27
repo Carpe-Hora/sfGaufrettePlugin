@@ -9,6 +9,8 @@
  * @since 2012-01-26
  */
 
+use Gaufrette\Adapter\Cache as CacheAdapter;
+
 /**
  * gaufrette factory class
  */
@@ -34,9 +36,10 @@ class PluginSfGaufretteFactory
   protected function createInstance($name = 'default')
   {
     $config = array_merge(array(
-      'adapter' => array(),
-      'cache'   => null,
-      'url_resolver' => array()), sfConfig::get(sprintf('app_gaufrette_%s', $name), array()));
+      'adapter'       => array(),
+      'cache'         => null,
+      'url_resolver'  => array()
+    ), sfConfig::get(sprintf('app_gaufrette_%s', $name), array()));
 
     $adapter = $this->createAdapter($config['adapter']);
 
@@ -54,10 +57,9 @@ class PluginSfGaufretteFactory
   protected function createAdapter($config)
   {
     $config = array_merge(array(
-                  'class'   => '\Gaufrette\Adapter\Local',
-                  'param'   => array('directory' => sfConfig::get('sf_upload_dir'))
-                ),
-                $config);
+      'class'   => '\Gaufrette\Adapter\Local',
+      'param'   => array('directory' => sfConfig::get('sf_upload_dir'))
+    ), $config);
 
     return $this->createObjectFromConfiguration($config);
   }
@@ -65,10 +67,9 @@ class PluginSfGaufretteFactory
   protected function createUrlResolver($config)
   {
     $config = array_merge(array(
-                  'class'   => 'sfPrefixUrlResolver',
-                  'param'   => array()
-                ),
-                $config);
+      'class'   => 'sfPrefixUrlResolver',
+      'param'   => array()
+    ), $config);
 
     return $this->createObjectFromConfiguration($config);
   }
@@ -80,7 +81,27 @@ class PluginSfGaufretteFactory
    */
   protected function createObjectFromConfiguration($parameters)
   {
+    $arguments = $this->prepareArguments($parameters['param']);
     $reflector = new ReflectionClass($parameters['class']);
-    return $reflector->newInstanceArgs($parameters['param']);
+    return $reflector->newInstanceArgs($arguments);
+  }
+
+  protected function prepareArguments($parameters)
+  {
+    if (!is_array($parameters))
+    {
+      return $parameters;
+    }
+
+    foreach ($parameters as $key => &$value)
+    {
+      // this argument should be transformed to an object
+      if (is_array($value) && isset($value['class']))
+      {
+        $value = $this->createObjectFromConfiguration($value);
+      }
+    }
+
+    return $parameters;
   }
 } // END OF PluginSfGaufretteFactory

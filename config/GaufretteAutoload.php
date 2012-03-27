@@ -22,6 +22,7 @@ class GaufretteAutloader
   protected function __construct()
   {
     spl_autoload_register(array($this, 'autoload'));
+    require_once __DIR__.'/../lib/vendor/Gaufrette/vendor/aws-sdk/sdk.class.php';
   }
 
   public function autoload($className)
@@ -41,7 +42,9 @@ class GaufretteAutloader
       $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
     }
 
-    $fileName = sfConfig::get('sf_lib_dir') . '/vendor/Gaufrette/src' . DIRECTORY_SEPARATOR . $fileName . $className . '.php';
+    $fileName = implode(DIRECTORY_SEPARATOR, array(
+      __DIR__, '..', 'lib', 'vendor', 'Gaufrette', 'src', $fileName.$className.'.php'
+    ));
     if (is_file($fileName))
     {
       require $fileName;

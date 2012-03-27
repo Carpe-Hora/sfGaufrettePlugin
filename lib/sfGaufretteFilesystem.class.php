@@ -26,4 +26,9 @@ class sfGaufretteFilesystem extends Gaufrette\Filesystem
   {
     return $this->resolver->resolve($key);
   }
+
+  public function __toString()
+  {
+    return '';
+  }
 } // END OF sfGaufretteFilesystem

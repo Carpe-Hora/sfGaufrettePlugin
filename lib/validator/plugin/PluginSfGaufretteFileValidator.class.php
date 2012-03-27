@@ -22,11 +22,11 @@ class PluginSfGaufretteFileValidator extends sfValidatorFile
   public function configure($options = array(), $messages = array())
   {
     $this->addRequiredOption('gaufrette');
-    $this->addOption('validated_file_class', 'sfGaufretteValidatedFile');
 
     parent::configure($options, $messages);
 
-    $this->setOption('path', $this->getOption('gaufrette'));
+    $this->setOption('validated_file_class', 'sfGaufretteValidatedFile');
+    $this->setOption('path', $options['gaufrette']);
   }
 } // END OF PluginSfGaufretteFileValidator
 
