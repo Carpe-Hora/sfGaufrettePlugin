@@ -22,7 +22,6 @@ class GaufretteAutloader
   protected function __construct()
   {
     spl_autoload_register(array($this, 'autoload'));
-    require_once __DIR__.'/../lib/vendor/Gaufrette/vendor/aws-sdk/sdk.class.php';
   }
 
   public function autoload($className)

@@ -21,16 +21,6 @@ class sfGaufrettePluginConfiguration extends sfPluginConfiguration
       'context.method_not_found',
       array($this, 'contextMethodNotFound')
     );
-    /*
-    // no need to connect user and routing
-    $this->dispatcher->connect(
-        'user.method_not_found',
-        array('sfGaufrettePluginUser', 'methodNotFound'));
-
-    $this->dispatcher->connect(
-        'routing.load_configuration',
-        array('sfGaufrettePluginRouting', 'listenToRoutingLoadConfigurationEvent'));
-    */
   }
 
   /**
@@ -57,7 +47,7 @@ class sfGaufrettePluginConfiguration extends sfPluginConfiguration
     else
     {
       require_once sfConfig::get('sf_plugins_dir') . '/sfGaufrettePlugin/config/GaufretteAutoload.php';
-      $gaufrette = $this->addGaufretteService($sf_context);
+      $gaufrette = $this->setGaufretteService($sf_context);
     }
 
     $event->setReturnValue(call_user_func_array(array($gaufrette, 'get'), $event['arguments']));
@@ -65,7 +55,7 @@ class sfGaufrettePluginConfiguration extends sfPluginConfiguration
   }
 
 
-  public function addGaufretteService(sfContext $context)
+  public function setGaufretteService(sfContext $context)
   {
     $gaufrette = new sfGaufretteFactory();
 

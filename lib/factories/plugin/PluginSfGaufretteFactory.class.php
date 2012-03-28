@@ -35,11 +35,17 @@ class PluginSfGaufretteFactory
 
   protected function createInstance($name = 'default')
   {
+    $config = sfConfig::get(sprintf('app_gaufrette_%s', $name), null);
+    if (null === $config)
+    {
+      throw new RuntimeException(sprintf('The gaufrette "%s" does not exist!', $name));
+    }
+
     $config = array_merge(array(
       'adapter'       => array(),
       'cache'         => null,
       'url_resolver'  => array()
-    ), sfConfig::get(sprintf('app_gaufrette_%s', $name), array()));
+    ), $config);
 
     $adapter = $this->createAdapter($config['adapter']);
 
@@ -82,6 +88,8 @@ class PluginSfGaufretteFactory
   protected function createObjectFromConfiguration($parameters)
   {
     $arguments = $this->prepareArguments($parameters['param']);
+    $arguments = null === $arguments ? array() : $arguments;
+
     $reflector = new ReflectionClass($parameters['class']);
     return $reflector->newInstanceArgs($arguments);
   }
@@ -93,12 +101,12 @@ class PluginSfGaufretteFactory
       return $parameters;
     }
 
-    foreach ($parameters as $key => &$value)
+    foreach ($parameters as $key => $value)
     {
       // this argument should be transformed to an object
       if (is_array($value) && isset($value['class']))
       {
-        $value = $this->createObjectFromConfiguration($value);
+        $parameters[$key] = $this->createObjectFromConfiguration($value);
       }
     }
 
