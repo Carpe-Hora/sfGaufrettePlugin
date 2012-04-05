@@ -9,6 +9,8 @@ first define your filesystem occurences :
 # app.yml
 all:
   gaufrette:
+    path:
+    autoload: true
     my_filesystem:
       adapter:
         class:  \Gaufrette\Adapter\Local
@@ -24,6 +26,10 @@ all:
         param:
           prefix: %SF_WEB_DIR%/uploads
 ```
+
+* The path option allow you to specify a different path for the gaufrette vendor.
+* The autoload option allow you to use your own autoloader instead of the plugin one.
+
 
 and access it through context :
 
