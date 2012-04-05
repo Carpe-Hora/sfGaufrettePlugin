@@ -46,7 +46,6 @@ class sfGaufrettePluginConfiguration extends sfPluginConfiguration
     }
     else
     {
-      require_once sfConfig::get('sf_plugins_dir') . '/sfGaufrettePlugin/config/GaufretteAutoload.php';
       $gaufrette = $this->setGaufretteService($sf_context);
     }
 

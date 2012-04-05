@@ -18,6 +18,17 @@ class PluginSfGaufretteFactory
 {
   protected $instances = array();
 
+  private static $initialized = false;
+
+  public function __construct()
+  {
+    if (self::$initialized == false)
+    {
+      require_once sfConfig::get('sf_plugins_dir') . '/sfGaufrettePlugin/config/GaufretteAutoload.php';
+      self::$initialized = true;
+    }
+  }
+
   /**
    * return given factory
    *
