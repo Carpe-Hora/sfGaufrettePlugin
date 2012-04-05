@@ -7,7 +7,7 @@
  * Code inspired from the SplClassLoader RFC
  * @see https://wiki.php.net/rfc/splclassloader#example_implementation
  */
-class GaufretteAutloader
+class GaufretteAutoloader
 {
   static protected $instance;
 
@@ -15,7 +15,7 @@ class GaufretteAutloader
   {
     if (is_null(self::$instance))
     {
-      self::$instance = new GaufretteAutloader();
+      self::$instance = new GaufretteAutoloader();
     }
   }
 
@@ -55,4 +55,4 @@ class GaufretteAutloader
   }
 }
 
-GaufretteAutloader::registerAutoload();
+GaufretteAutoloader::registerAutoload();
