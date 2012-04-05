@@ -1,5 +1,7 @@
 all:
   gaufrette:
+    path:
+    autoload: true
     default:
       adapter:
         class:  \Gaufrette\Adapter\Local

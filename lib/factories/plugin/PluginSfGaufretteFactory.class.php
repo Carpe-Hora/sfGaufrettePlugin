@@ -24,7 +24,10 @@ class PluginSfGaufretteFactory
   {
     if (self::$initialized == false)
     {
-      require_once sfConfig::get('sf_plugins_dir') . '/sfGaufrettePlugin/config/GaufretteAutoload.php';
+      if (sfConfig::get('app_gaufrette_autoload'))
+      {
+        require_once sfConfig::get('sf_plugins_dir') . '/sfGaufrettePlugin/config/GaufretteAutoload.php';
+      }
       self::$initialized = true;
     }
   }

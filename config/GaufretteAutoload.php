@@ -41,9 +41,19 @@ class GaufretteAutoloader
       $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
     }
 
-    $fileName = implode(DIRECTORY_SEPARATOR, array(
-      __DIR__, '..', 'lib', 'vendor', 'Gaufrette', 'src', $fileName.$className.'.php'
-    ));
+    if(sfConfig::get('app_gaufrette_path'))
+    {
+      $fileName = implode(DIRECTORY_SEPARATOR, array(
+        sfConfig::get('app_gaufrette_path'), 'src', $fileName.$className.'.php'
+      ));
+    }
+    else
+    {
+      $fileName = implode(DIRECTORY_SEPARATOR, array(
+        __DIR__, '..', 'lib', 'vendor', 'Gaufrette', 'src', $fileName.$className.'.php'
+      ));
+    }
+
     if (is_file($fileName))
     {
       require $fileName;
