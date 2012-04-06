@@ -119,5 +119,5 @@ class ProjectConfiguration extends sfProjectConfiguration
 Licence
 -------
 
-SmsSender is released under the MIT License. See the bundled LICENSE file for
+sfGaufrettePlugin is released under the MIT License. See the bundled LICENSE file for
 details.
