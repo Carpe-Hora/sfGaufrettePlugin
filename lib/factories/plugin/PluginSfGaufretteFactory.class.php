@@ -16,24 +16,31 @@ use Gaufrette\Adapter\Cache as CacheAdapter;
  */
 class PluginSfGaufretteFactory
 {
+  protected $configCache;
   protected $instances = array();
 
-  private static $initialized = false;
+  protected static $initialized = false;
 
-  public function __construct()
+
+  public function __construct(sfConfigCache $configCache)
   {
-    if (self::$initialized == false)
+    if (self::$initialized === true)
     {
-      if (sfConfig::get('app_gaufrette_autoload'))
-      {
-        require_once sfConfig::get('sf_plugins_dir') . '/sfGaufrettePlugin/config/GaufretteAutoload.php';
-      }
-      self::$initialized = true;
+      return;
     }
+
+    if (sfConfig::get('app_gaufrette_autoload'))
+    {
+      require_once sfConfig::get('sf_plugins_dir') . '/sfGaufrettePlugin/config/GaufretteAutoload.php';
+    }
+
+    $this->configCache = $configCache;
+
+    self::$initialized = true;
   }
 
   /**
-   * return given factory
+   * return given gaufrette.
    *
    * @return Gaufrette\Filesystem
    */
@@ -49,11 +56,14 @@ class PluginSfGaufretteFactory
 
   protected function createInstance($name = 'default')
   {
-    $config = sfConfig::get(sprintf('app_gaufrette_%s', $name), null);
-    if (null === $config)
+    $this->loadConfiguration();
+
+    if (!isset(sfGaufretteConfig::$gaufrettes[$name]))
     {
       throw new RuntimeException(sprintf('The gaufrette "%s" does not exist!', $name));
     }
+    
+    $config = sfGaufretteConfig::$gaufrettes[$name];
 
     $config = array_merge(array(
       'adapter'       => array(),
@@ -125,5 +135,14 @@ class PluginSfGaufretteFactory
     }
 
     return $parameters;
+  }
+
+  protected function loadConfiguration()
+  {
+    if (!class_exists('sfGaufretteConfig', false))
+    {
+      $this->configCache->registerConfigHandler('config/gaufrettes.yml', 'sfGaufretteConfigHander');
+      require_once $this->configCache->checkConfig('config/gaufrettes.yml');
+    }
   }
 } // END OF PluginSfGaufretteFactory

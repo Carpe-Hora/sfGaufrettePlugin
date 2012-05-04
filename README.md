@@ -9,7 +9,7 @@ What's cool with this plugin?
 -----------------------------
 
 First, it uses a cool project. Then, it's cool because it allows you to define
-"gaufrettes" directly from the `app.yml` configuration file and use them easily
+"gaufrettes" directly from the `config/gaufrettes.yml` configuration file and use them easily
 everywhere in your applications.
 
 It also provides a way to map filesystem resources (files) to their URL.
@@ -22,31 +22,25 @@ Exemples
 ### Gaufrettes definition
 
 ``` yaml
-# app.yml
-all:
-  gaufrette:
-                                          # path to the gaufrette library,
-    path:     ~                           # allows you to specify a different
-                                          # path than the default one
-    autoload: true                        # should we use the autoloader bundled with Gaufrette?
-
-    my_filesystem:
-      adapter:                            # create a ftp filesystem
-        class:  \Gaufrette\Adapter\Ftp
-        param:
-          path:     /home/joe
-          host:     foo.com
-          username: joe
-          password: joe
-      cache:                              # cache it locally
-        class:  \Gaufrette\Adapter\Local
-        param:
-          destination: %SF_CACHE_DIR%/gaufrette/cache
-        ttl:    3600
-      url_resolver:                       # and define the URL resolver
-        class:  sfPrefixUrlResolver
-        param:
-          prefix: /uploads/
+# config/gaufrettes.yml
+all:                                    # the environment
+  my_filesystem:
+    adapter:                            # create a ftp filesystem
+      class:  \Gaufrette\Adapter\Ftp
+      param:
+        path:     /home/joe
+        host:     foo.com
+        username: joe
+        password: joe
+    cache:                              # cache it locally
+      class:  \Gaufrette\Adapter\Local
+      param:
+        destination: %SF_CACHE_DIR%/gaufrette/cache
+      ttl:    3600
+    url_resolver:                       # and define the URL resolver
+      class:  sfPrefixUrlResolver
+      param:
+        prefix: /uploads/
 ```
 
 ### Gaufrette usage

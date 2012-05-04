@@ -2,14 +2,3 @@ all:
   gaufrette:
     path:     ~
     autoload: true
-
-    default:
-      adapter:
-        class:  \Gaufrette\Adapter\Local
-        param:
-          destination: %SF_UPLOAD_DIR%
-      url_resolver:
-        class:  sfPrefixUrlResolver
-        param:
-          prefix: /uploads/
-

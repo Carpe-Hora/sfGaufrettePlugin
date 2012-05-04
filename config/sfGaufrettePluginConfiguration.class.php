@@ -56,7 +56,7 @@ class sfGaufrettePluginConfiguration extends sfPluginConfiguration
 
   public function setGaufretteService(sfContext $context)
   {
-    $gaufrette = new sfGaufretteFactory();
+    $gaufrette = new sfGaufretteFactory($this->configuration->getConfigCache());
 
     // to finish, add it to the current context
     $context->set('gaufrette', $gaufrette);
