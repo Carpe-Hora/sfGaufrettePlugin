@@ -1,0 +1,11 @@
+all:
+  uploads:
+    adapter:
+      class: \Gaufrette\Adapter\Local
+      param:
+        directory: '%SF_UPLOAD_DIR%'
+        create:    true
+    url_resolver:
+      class:  sfPrefixUrlResolver
+      param:
+        prefix: '/uploads/'
