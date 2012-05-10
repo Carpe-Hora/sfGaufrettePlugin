@@ -1,0 +1,6 @@
+autoload:
+  sfGaufrettePlugin_lib:
+    name:           gaufrette vendor
+    path:           <?php echo realpath(dirname(__FILE__).'/../lib')."\n" ?>
+    recursive:      true
+    exclude:        [vendor]
