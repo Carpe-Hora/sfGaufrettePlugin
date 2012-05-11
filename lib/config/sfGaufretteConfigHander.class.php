@@ -18,7 +18,7 @@ class sfGaufretteConfigHander extends sfYamlConfigHandler
     return implode(PHP_EOL, $code);
   }
 
-  /** 
+  /**
    * Returns the configuration for the current config handler.
    *
    * @param array $configFiles An array of ordered configuration files
@@ -30,12 +30,12 @@ class sfGaufretteConfigHander extends sfYamlConfigHandler
     ));
   }
 
-  /** 
+  /**
    * Merges default, all and current environment configurations.
    *
    * @param array $config The main configuration array
    *
-   * @return array The merged configuration                                                                
+   * @return array The merged configuration
    */
   public static function flattenConfigurationWithEnvironment($config)
   {
@@ -43,6 +43,6 @@ class sfGaufretteConfigHander extends sfYamlConfigHandler
       isset($config['default']) && is_array($config['default']) ? $config['default'] : array(),
       isset($config['all']) && is_array($config['all']) ? $config['all'] : array(),
       isset($config[sfConfig::get('sf_environment')]) && is_array($config[sfConfig::get('sf_environment')]) ? $config[sfConfig::get('sf_environment')] : array()
-    );  
+    );
   }
 }
