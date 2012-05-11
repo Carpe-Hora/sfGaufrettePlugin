@@ -10,6 +10,6 @@ env:
 before_script:
 
 
-script: php ./test/bin/prove.php --symfony=symfony-1.4.17/lib/
+script: php ./test/bin/prove.php
 
 
