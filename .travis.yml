@@ -1,0 +1,19 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+
+before_script:
+
+  # phing
+  - pyrus channel-discover pear.phing.info
+  - pyrus install phing/phing
+
+  # Composer
+  - wget http://www.symfony-project.org/get/symfony-1.4.17.tgz
+  - tar -xvzf symfony-1.4.17.tgz
+
+script: php ./test/bin/prove.php --symfony=symfony-1.4.17/lib/
+
+
