@@ -4,6 +4,7 @@ sfGaufrettePlugin
 The sfGaufrettePlugin integrates [Gaufrette](https://github.com/KnpLabs/Gaufrette/)
 in a symfony project.
 
+[![Build Status](https://secure.travis-ci.org/Carpe-Hora/sfGaufrettePlugin.png?branch=master)](http://travis-ci.org/Carpe-Hora/sfGaufrettePlugin)
 
 What's cool with this plugin?
 -----------------------------
