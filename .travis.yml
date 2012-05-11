@@ -9,7 +9,8 @@ env:
 
 before_script:
 
+  - ./prepare_tests.sh
 
-script: php ./test/bin/prove.php
+script: php ./test/bin/prove.php --symfony=lib/vendor/symfony/lib
 
 

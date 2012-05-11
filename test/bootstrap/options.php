@@ -42,9 +42,9 @@ if (empty($_SERVER['SYMFONY']))
 {
   foreach (explode(':', $options['symfony']) as $path)
   {
-    if (is_dir($path))
+    if (is_dir(dirname(__FILE__).'/../../'.$path))
     {
-      $_SERVER['SYMFONY'] = $path;
+      $_SERVER['SYMFONY'] = dirname(__FILE__).'/../../'.$path;
       break;
     }
   }
