@@ -74,7 +74,8 @@ two of them included in the plugin:
 ### Form integration
 
 We provide a validator to use instead of the `sfValidatorFile` to ease the
-integration in forms. See the [`sfGaufretteFileValidator`](https://github.com/themouette/sfGaufrettePlugin/blob/master/lib/validator/plugin/PluginSfGaufretteFileValidator.class.php)
+integration in forms. See the
+[`sfGaufretteFileValidator`](https://github.com/Carpe-Hora/sfGaufrettePlugin/blob/master/lib/validator/plugin/PluginSfGaufretteFileValidator.class.php)
 class for more information.
 
 Installation
@@ -83,7 +84,7 @@ Installation
 Install the behavior in your plugins directory:
 
 ```
-git submodule add git://github.com/themouette/sfGaufrettePlugin.git plugins/sfGaufrettePlugin
+git submodule add git://github.com/Carpe-Hora/sfGaufrettePlugin.git
 git submodule update --init --recursive
 ```
 
