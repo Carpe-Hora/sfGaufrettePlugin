@@ -16,7 +16,7 @@ everywhere in your applications.
 It also provides a way to map filesystem resources (files) to their URL.
 
 
-Exemples
+Examples
 -----
 
 
@@ -42,6 +42,28 @@ all:                                    # the environment
       class:  sfPrefixUrlResolver
       param:
         prefix: /uploads/
+  my_s3_filesystem:
+    adapter:                            # create a ftp filesystem
+      class:  \AmazonS3Adapter
+      param:
+        amazon:
+          class:  \AmazonS3
+          param:
+            options:
+              key: <AMAZON-ACCESS-KEY>
+              secret: <AMAZON-ACCESS-SECRET>
+        bucket: <BUCKET-NAME>
+        options:
+          region: s3-eu-west-1.amazonaws.com
+    cache:                              # cache it locally
+      class:  \Gaufrette\Adapter\Local
+      param:
+        destination: %SF_CACHE_DIR%/gaufrette/cache
+      ttl:    3600
+    url_resolver:                       # and define the URL resolver
+      class:  sfPrefixUrlResolver
+      param:
+        prefix: http://<bucket-name>.s3-website-eu-west-1.amazonaws.com/
 ```
 
 ### Gaufrette usage
