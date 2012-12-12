@@ -1,3 +1,6 @@
 [submodule "lib/vendor/Gaufrette"]
 	path = lib/vendor/Gaufrette
 	url = git://github.com/KnpLabs/Gaufrette.git
+[submodule "lib/vendor/aws-sdk"]
+	path = lib/vendor/aws-sdk
+	url = http://github.com/amazonwebservices/aws-sdk-for-php
