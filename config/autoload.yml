@@ -4,3 +4,8 @@ autoload:
     path:           <?php echo realpath(dirname(__FILE__).'/../lib')."\n" ?>
     recursive:      true
     exclude:        [vendor]
+
+  aws-sdk-api:
+    name:           aws-sdk vendor
+    path:           <?php echo realpath(dirname(__FILE__).'/../lib/vendor/aws-sdk')."\n" ?>
+    recursive:      true

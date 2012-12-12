@@ -9,14 +9,16 @@
  * @since       2012-03-27
  */
 
+use \AmazonS3 as AmazonClient;
+
 /**
  * The amazon s3 optionnable adapter
  */
 class AmazonS3Adapter extends Gaufrette\Adapter\AmazonS3
 {
-  public function __construct(\AmazonS3 $service, $bucket, $create = false, $options = array())
+  public function __construct(AmazonClient $service, $bucket, $options = array())
   {
-    parent::__construct($service, $bucket, $create, $options);
+    parent::__construct($service, $bucket, $options);
 
     if (!empty($options['directory']))
     {
